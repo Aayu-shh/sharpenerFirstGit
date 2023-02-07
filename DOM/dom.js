@@ -59,20 +59,52 @@ header.style.borderBottom = "solid 3px #000"            //Border on the bottom o
 // }
 
 
-// GetElementsByTagName
+//3 GetElementsByTagName
 
 //Note: fetches last li tag (class != list-group-item) and changes apply to EVEN last li tag 
 
-var li = document.getElementsByTagName('li');     // multiElement Selector
-console.log(li);
-console.log(li[1].textContent = "Hello");          //change + log 2nd Item 
+// var li = document.getElementsByTagName('li');     // multiElement Selector
+// console.log(li);
+// console.log(li[1].textContent = "Hello");          //change + log 2nd Item 
 
-li[2].style.backgroundColor = 'green';           //task4 additions
+// li[2].style.backgroundColor = 'green';           //task4 additions
 
 
-//Giver ERROR
-//items.style.backgroundColor = 'yellow';             //Doesnt work  -- An HTML Collection deosnt have STYLE
+// //Giver ERROR
+// //items.style.backgroundColor = 'yellow';             //Doesnt work  -- An HTML Collection deosnt have STYLE
 
-for (var i = 0; i < li.length; i++) {
-  li[i].style.fontWeight = 'bold';               //Task4 Additions
-}
+// for (var i = 0; i < li.length; i++) {
+//   li[i].style.fontWeight = 'bold';               //Task4 Additions
+// }
+
+
+//4 querySelector
+
+//NOTE: Only Grabs the first one
+
+var header = document.querySelector('#main-header');
+header.style.borderBottom = 'solid 4px #ccc';
+
+var input = document.querySelector("input");
+input.value = 'Hello World';
+
+var submit = document.querySelector('input[type="submit"]');
+submit.value="SEND";
+
+var item = document.querySelector('.list-group-item');      //class .
+item.style.color = 'red';
+
+var lastItem  = document.querySelector('.list-group-item:last-child');
+lastItem.style.color='blue';
+
+
+//TASK6 - Solutions Here  \|/
+var secondItem = document.querySelector('.list-group-item:nth-child(2)');     //nth-child(index) - psudeo selector
+secondItem.style.color = 'green';
+
+var thirdItem = document.querySelector('.list-group-item:nth-child(3)');     //nth-child(index) - psudeo selector
+thirdItem.style.color = 'white';
+
+
+//
+
