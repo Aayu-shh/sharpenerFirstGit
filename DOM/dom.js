@@ -82,29 +82,46 @@ header.style.borderBottom = "solid 3px #000"            //Border on the bottom o
 
 //NOTE: Only Grabs the first one
 
-var header = document.querySelector('#main-header');
-header.style.borderBottom = 'solid 4px #ccc';
+// var header = document.querySelector('#main-header');
+// header.style.borderBottom = 'solid 4px #ccc';
 
-var input = document.querySelector("input");
-input.value = 'Hello World';
+// var input = document.querySelector("input");
+// input.value = 'Hello World';
 
-var submit = document.querySelector('input[type="submit"]');
-submit.value="SEND";
+// var submit = document.querySelector('input[type="submit"]');
+// submit.value="SEND";
 
-var item = document.querySelector('.list-group-item');      //class .
-item.style.color = 'red';
+// var item = document.querySelector('.list-group-item');      //class .
+// item.style.color = 'red';
 
-var lastItem  = document.querySelector('.list-group-item:last-child');
-lastItem.style.color='blue';
-
-
-//TASK6 - Solutions Here  \|/
-var secondItem = document.querySelector('.list-group-item:nth-child(2)');     //nth-child(index) - psudeo selector
-secondItem.style.color = 'green';
-
-var thirdItem = document.querySelector('.list-group-item:nth-child(3)');     //nth-child(index) - psudeo selector
-thirdItem.style.color = 'white';
+// var lastItem  = document.querySelector('.list-group-item:last-child');
+// lastItem.style.color='blue';
 
 
-//
+// //TASK6 - Solutions Here  \|/
+// var secondItem = document.querySelector('.list-group-item:nth-child(2)');     //nth-child(index) - psudeo selector
+// secondItem.style.color = 'green';
 
+// var thirdItem = document.querySelector('.list-group-item:nth-child(3)');     //nth-child(index) - psudeo selector
+// thirdItem.style.color = 'white';
+
+
+// Task6 Part 2
+
+//querySelectorAll
+
+var titles = document.querySelectorAll('.title');
+console.log(titles);      //Gives the node list of TITLES  - traversable
+
+titles[0].textContent='Hello';
+
+//Alternating   
+
+var odd = document.querySelectorAll('li:nth-child(odd)');
+var even = document.querySelectorAll('li:nth-child(even)');
+
+for(var i=0;i<odd.length;i++)
+{
+  odd[i].style.backgroundColor = "#f4f4f4";   //lighter grey
+  even[i].style.backgroundColor = "#ccc";      //Darker Grey
+}
