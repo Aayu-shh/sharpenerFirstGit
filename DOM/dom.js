@@ -37,19 +37,23 @@ console.log(headerTitle.innerText);
 header.style.borderBottom = "solid 3px #000"            //Border on the bottom of the headers
 
 
-//2 GetElementbyClassName
+//2 GetElementsbyClassName
+
+//NOTE : Method NAMEs are case sensitive - camel case only
+
 
 var items = document.getElementsByClassName('list-group-item');     // multiElement Selector
+
 console.log(items);
 console.log(items[1].textContent="Hello");          //change + log 2nd Item 
 
 //items[1].style.fontWeight = 'bold';
-items[1].style.backgroundColor = 'green';              //NOTE : Method NAMEs are case sensitive - camel case only
+items[2].style.backgroundColor = 'green';           //task4 additions
+
 
 //Giver ERROR
 //items.style.backgroundColor = 'yellow';             //Doesnt work  -- An HTML Collection deosnt have STYLE
 
-
 for(var i = 0;i < items.length;i++){
-    items[i].style.fontWeight='bold';               //Overrrides Item2 BgColor
+    items[i].style.fontWeight='bold';               //Task4 Additions
 }
