@@ -42,18 +42,37 @@ header.style.borderBottom = "solid 3px #000"            //Border on the bottom o
 //NOTE : Method NAMEs are case sensitive - camel case only
 
 
-var items = document.getElementsByClassName('list-group-item');     // multiElement Selector
+// var items = document.getElementsByClassName('list-group-item');     // multiElement Selector
 
-console.log(items);
-console.log(items[1].textContent="Hello");          //change + log 2nd Item 
+// console.log(items);
+// console.log(items[1].textContent="Hello");          //change + log 2nd Item 
 
-//items[1].style.fontWeight = 'bold';
-items[2].style.backgroundColor = 'green';           //task4 additions
+// //items[1].style.fontWeight = 'bold';
+// items[2].style.backgroundColor = 'green';           //task4 additions
+
+
+// //Giver ERROR
+// //items.style.backgroundColor = 'yellow';             //Doesnt work  -- An HTML Collection deosnt have STYLE
+
+// for(var i = 0;i < items.length;i++){
+//     items[i].style.fontWeight='bold';               //Task4 Additions
+// }
+
+
+// GetElementsByTagName
+
+//Note: fetches last li tag (class != list-group-item) and changes apply to EVEN last li tag 
+
+var li = document.getElementsByTagName('li');     // multiElement Selector
+console.log(li);
+console.log(li[1].textContent = "Hello");          //change + log 2nd Item 
+
+li[2].style.backgroundColor = 'green';           //task4 additions
 
 
 //Giver ERROR
 //items.style.backgroundColor = 'yellow';             //Doesnt work  -- An HTML Collection deosnt have STYLE
 
-for(var i = 0;i < items.length;i++){
-    items[i].style.fontWeight='bold';               //Task4 Additions
+for (var i = 0; i < li.length; i++) {
+  li[i].style.fontWeight = 'bold';               //Task4 Additions
 }
