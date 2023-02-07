@@ -21,6 +21,9 @@
 
 var headerTitle = (document.getElementById('header-title'));            //title text comes INSIDE header
 var header = (document.getElementById('main-header'));
+
+console.log(headerTitle.innerText);
+
 //console.log(headerTitle);               //logs header node element
 
 // headerTitle.textContent = "Hello";                      //Changes Header
@@ -36,17 +39,17 @@ header.style.borderBottom = "solid 3px #000"            //Border on the bottom o
 
 //2 GetElementbyClassName
 
-var items = document.getElementsByClassName('list-group-item');
+var items = document.getElementsByClassName('list-group-item');     // multiElement Selector
 console.log(items);
 console.log(items[1].textContent="Hello");          //change + log 2nd Item 
 
-items[1].style.fontWeight = 'bold';
-items[1].style.backgroundColor = 'yellow';              //NOTE : Method NAMEs are case sensitive - camel case only
+//items[1].style.fontWeight = 'bold';
+items[1].style.backgroundColor = 'green';              //NOTE : Method NAMEs are case sensitive - camel case only
 
 //Giver ERROR
 //items.style.backgroundColor = 'yellow';             //Doesnt work  -- An HTML Collection deosnt have STYLE
 
 
 for(var i = 0;i < items.length;i++){
-    items[i].style.backgroundColor='#f4f4f4';               //Overrrides Item2 BgColor
+    items[i].style.fontWeight='bold';               //Overrrides Item2 BgColor
 }
