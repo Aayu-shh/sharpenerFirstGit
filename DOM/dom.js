@@ -186,9 +186,22 @@ var newDivText = document.createTextNode('Hello World');
 newDiv.appendChild(newDivText);
 
 var container = document.querySelector('header .container');
+//console.log(container);
 var h1 = document.querySelector('header h1');
-
+//console.log(h1)
 container.insertBefore(newDiv,h1);
-console.log(newDiv);
+//console.log(newDiv);
 
 newDiv.style.fontFamily = 'monotype corsiva';
+
+var li = document.createElement('li');
+var textNode = document.createTextNode('Item 0');
+li.className = 'list-group-item';
+li.appendChild(textNode);
+
+//select <ul>
+var ul = document.querySelector('.list-group');
+
+
+ul.insertBefore(li,ul.firstElementChild);       //Adds <li>element before ul - list ka 1t element child ie item1 <li> tag
+console.log(li);
