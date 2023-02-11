@@ -110,18 +110,85 @@ header.style.borderBottom = "solid 3px #000"            //Border on the bottom o
 
 //querySelectorAll
 
-var titles = document.querySelectorAll('.title');
-console.log(titles);      //Gives the node list of TITLES  - traversable
+// var titles = document.querySelectorAll('.title');
+// console.log(titles);      //Gives the node list of TITLES  - traversable
 
-titles[0].textContent='Hello';
+// titles[0].textContent='Hello';
 
-//Alternating   
+// //Alternating   
 
-var odd = document.querySelectorAll('li:nth-child(odd)');
-var even = document.querySelectorAll('li:nth-child(even)');
+// var odd = document.querySelectorAll('li:nth-child(odd)');
+// var even = document.querySelectorAll('li:nth-child(even)');
 
-for(var i=0;i<odd.length;i++)
-{
-  odd[i].style.backgroundColor = "#f4f4f4";   //lighter grey
-  even[i].style.backgroundColor = "#ccc";      //Darker Grey
-}
+// for(var i=0;i<odd.length;i++)
+// {
+//   odd[i].style.backgroundColor = "#f4f4f4";   //lighter grey
+//   even[i].style.backgroundColor = "#ccc";      //Darker Grey
+// }
+
+//Traversing  the DOM - JS DOM cracsh course Part2   //
+
+var itemList = document.querySelector('#items');
+
+//parentNode
+//console.log(itemList.parentNode);     //on higher syntax
+
+// itemList.parentNode.style.backgroundColor = '#f4f4f4';    //lightGrey
+
+// console.log(itemList.parentNode.parentNode.parentNode);
+
+////Parent Element ////
+//console.log(itemList.parentElement);
+
+// itemList.parentElement.style.backgroundColor = '#f4f4f4';    //lightGrey
+
+// console.log(itemList.parentElement.parentElement.parentElement);
+
+
+//Child Nodes//
+
+//console.log(itemList.childNodes);     //NodeList -- Basically an Array -- includes LineBreak Elements
+//console.log(itemList.childNodes);
+// console.log(itemList.children);
+// itemList.children[1].style.backgroundColor='yellow';
+
+// console.log(itemList.firstElementChild);
+// itemList.firstElementChild.textContent = "Hello 1";
+
+// console.log(itemList.lastElementChild);
+// itemList.lastElementChild.textContent = "Hello 5";
+
+//Next Sibling
+console.log(itemList.nextSibling);
+
+//Next Element Sibling
+console.log(itemList.nextElementSibling);   //No next siblng , adding <span> for it to return <span>
+
+//Previous SIbling
+console.log(itemList.previousSibling);
+
+console.log(itemList.previousElementSibling);
+
+//create element
+var newDiv = document.createElement('div');
+//add class
+newDiv.className = 'hello';
+//add id
+newDiv.id='hello1';
+
+//Add Attribute
+newDiv.setAttribute('title','Hello Div');
+
+//Create text node
+var newDivText = document.createTextNode('Hello World');
+
+//Add text to DIV
+newDiv.appendChild(newDivText);
+
+var container = document.querySelector('header .container');
+var h1 = document.querySelector('header h1');
+
+container.insertBefore(newDiv,h1);
+console.log(newDiv);
+
+newDiv.style.fontFamily = 'monotype corsiva';
