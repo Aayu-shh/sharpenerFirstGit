@@ -59,20 +59,149 @@ header.style.borderBottom = "solid 3px #000"            //Border on the bottom o
 // }
 
 
-// GetElementsByTagName
+//3 GetElementsByTagName
 
 //Note: fetches last li tag (class != list-group-item) and changes apply to EVEN last li tag 
 
-var li = document.getElementsByTagName('li');     // multiElement Selector
+// var li = document.getElementsByTagName('li');     // multiElement Selector
+// console.log(li);
+// console.log(li[1].textContent = "Hello");          //change + log 2nd Item 
+
+// li[2].style.backgroundColor = 'green';           //task4 additions
+
+
+// //Giver ERROR
+// //items.style.backgroundColor = 'yellow';             //Doesnt work  -- An HTML Collection deosnt have STYLE
+
+// for (var i = 0; i < li.length; i++) {
+//   li[i].style.fontWeight = 'bold';               //Task4 Additions
+// }
+
+
+//4 querySelector
+
+//NOTE: Only Grabs the first one
+
+// var header = document.querySelector('#main-header');
+// header.style.borderBottom = 'solid 4px #ccc';
+
+// var input = document.querySelector("input");
+// input.value = 'Hello World';
+
+// var submit = document.querySelector('input[type="submit"]');
+// submit.value="SEND";
+
+// var item = document.querySelector('.list-group-item');      //class .
+// item.style.color = 'red';
+
+// var lastItem  = document.querySelector('.list-group-item:last-child');
+// lastItem.style.color='blue';
+
+
+// //TASK6 - Solutions Here  \|/
+// var secondItem = document.querySelector('.list-group-item:nth-child(2)');     //nth-child(index) - psudeo selector
+// secondItem.style.color = 'green';
+
+// var thirdItem = document.querySelector('.list-group-item:nth-child(3)');     //nth-child(index) - psudeo selector
+// thirdItem.style.color = 'white';
+
+
+// Task6 Part 2
+
+//querySelectorAll
+
+// var titles = document.querySelectorAll('.title');
+// console.log(titles);      //Gives the node list of TITLES  - traversable
+
+// titles[0].textContent='Hello';
+
+// //Alternating   
+
+// var odd = document.querySelectorAll('li:nth-child(odd)');
+// var even = document.querySelectorAll('li:nth-child(even)');
+
+// for(var i=0;i<odd.length;i++)
+// {
+//   odd[i].style.backgroundColor = "#f4f4f4";   //lighter grey
+//   even[i].style.backgroundColor = "#ccc";      //Darker Grey
+// }
+
+//Traversing  the DOM - JS DOM cracsh course Part2   //
+
+var itemList = document.querySelector('#items');
+
+//parentNode
+//console.log(itemList.parentNode);     //on higher syntax
+
+// itemList.parentNode.style.backgroundColor = '#f4f4f4';    //lightGrey
+
+// console.log(itemList.parentNode.parentNode.parentNode);
+
+////Parent Element ////
+//console.log(itemList.parentElement);
+
+// itemList.parentElement.style.backgroundColor = '#f4f4f4';    //lightGrey
+
+// console.log(itemList.parentElement.parentElement.parentElement);
+
+
+//Child Nodes//
+
+//console.log(itemList.childNodes);     //NodeList -- Basically an Array -- includes LineBreak Elements
+//console.log(itemList.childNodes);
+// console.log(itemList.children);
+// itemList.children[1].style.backgroundColor='yellow';
+
+// console.log(itemList.firstElementChild);
+// itemList.firstElementChild.textContent = "Hello 1";
+
+// console.log(itemList.lastElementChild);
+// itemList.lastElementChild.textContent = "Hello 5";
+
+//Next Sibling
+console.log(itemList.nextSibling);
+
+//Next Element Sibling
+console.log(itemList.nextElementSibling);   //No next siblng , adding <span> for it to return <span>
+
+//Previous SIbling
+console.log(itemList.previousSibling);
+
+console.log(itemList.previousElementSibling);
+
+//create element
+var newDiv = document.createElement('div');
+//add class
+newDiv.className = 'hello';
+//add id
+newDiv.id='hello1';
+
+//Add Attribute
+newDiv.setAttribute('title','Hello Div');
+
+//Create text node
+var newDivText = document.createTextNode('Hello World');
+
+//Add text to DIV
+newDiv.appendChild(newDivText);
+
+var container = document.querySelector('header .container');
+//console.log(container);
+var h1 = document.querySelector('header h1');
+//console.log(h1)
+container.insertBefore(newDiv,h1);
+//console.log(newDiv);
+
+newDiv.style.fontFamily = 'monotype corsiva';
+
+var li = document.createElement('li');
+var textNode = document.createTextNode('Item 0');
+li.className = 'list-group-item';
+li.appendChild(textNode);
+
+//select <ul>
+var ul = document.querySelector('.list-group');
+
+
+ul.insertBefore(li,ul.firstElementChild);       //Adds <li>element before ul - list ka 1t element child ie item1 <li> tag
 console.log(li);
-console.log(li[1].textContent = "Hello");          //change + log 2nd Item 
-
-li[2].style.backgroundColor = 'green';           //task4 additions
-
-
-//Giver ERROR
-//items.style.backgroundColor = 'yellow';             //Doesnt work  -- An HTML Collection deosnt have STYLE
-
-for (var i = 0; i < li.length; i++) {
-  li[i].style.fontWeight = 'bold';               //Task4 Additions
-}
