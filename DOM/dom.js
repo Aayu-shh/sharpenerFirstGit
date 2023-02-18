@@ -19,10 +19,10 @@
 
   // GetElementByID
 
-var headerTitle = (document.getElementById('header-title'));            //title text comes INSIDE header
-var header = (document.getElementById('main-header'));
+// var headerTitle = (document.getElementById('header-title'));            //title text comes INSIDE header
+// var header = (document.getElementById('main-header'));
 
-console.log(headerTitle.innerText);
+// console.log(headerTitle.innerText);
 
 //console.log(headerTitle);               //logs header node element
 
@@ -34,7 +34,7 @@ console.log(headerTitle.innerText);
 
 //headerTitle.innerHTML = "<h3> Hello InnerHTML</h3>"
 
-header.style.borderBottom = "solid 3px #000"            //Border on the bottom of the headers
+//header.style.borderBottom = "solid 3px #000"            //Border on the bottom of the headers
 
 
 //2 GetElementsbyClassName
@@ -128,80 +128,139 @@ header.style.borderBottom = "solid 3px #000"            //Border on the bottom o
 
 //Traversing  the DOM - JS DOM cracsh course Part2   //
 
-var itemList = document.querySelector('#items');
+// var itemList = document.querySelector('#items');
 
-//parentNode
-//console.log(itemList.parentNode);     //on higher syntax
+// //parentNode
+// //console.log(itemList.parentNode);     //on higher syntax
 
-// itemList.parentNode.style.backgroundColor = '#f4f4f4';    //lightGrey
+// // itemList.parentNode.style.backgroundColor = '#f4f4f4';    //lightGrey
 
-// console.log(itemList.parentNode.parentNode.parentNode);
+// // console.log(itemList.parentNode.parentNode.parentNode);
 
-////Parent Element ////
-//console.log(itemList.parentElement);
+// ////Parent Element ////
+// //console.log(itemList.parentElement);
 
-// itemList.parentElement.style.backgroundColor = '#f4f4f4';    //lightGrey
+// // itemList.parentElement.style.backgroundColor = '#f4f4f4';    //lightGrey
 
-// console.log(itemList.parentElement.parentElement.parentElement);
-
-
-//Child Nodes//
-
-//console.log(itemList.childNodes);     //NodeList -- Basically an Array -- includes LineBreak Elements
-//console.log(itemList.childNodes);
-// console.log(itemList.children);
-// itemList.children[1].style.backgroundColor='yellow';
-
-// console.log(itemList.firstElementChild);
-// itemList.firstElementChild.textContent = "Hello 1";
-
-// console.log(itemList.lastElementChild);
-// itemList.lastElementChild.textContent = "Hello 5";
-
-//Next Sibling
-console.log(itemList.nextSibling);
-
-//Next Element Sibling
-console.log(itemList.nextElementSibling);   //No next siblng , adding <span> for it to return <span>
-
-//Previous SIbling
-console.log(itemList.previousSibling);
-
-console.log(itemList.previousElementSibling);
-
-//create element
-var newDiv = document.createElement('div');
-//add class
-newDiv.className = 'hello';
-//add id
-newDiv.id='hello1';
-
-//Add Attribute
-newDiv.setAttribute('title','Hello Div');
-
-//Create text node
-var newDivText = document.createTextNode('Hello World');
-
-//Add text to DIV
-newDiv.appendChild(newDivText);
-
-var container = document.querySelector('header .container');
-//console.log(container);
-var h1 = document.querySelector('header h1');
-//console.log(h1)
-container.insertBefore(newDiv,h1);
-//console.log(newDiv);
-
-newDiv.style.fontFamily = 'monotype corsiva';
-
-var li = document.createElement('li');
-var textNode = document.createTextNode('Item 0');
-li.className = 'list-group-item';
-li.appendChild(textNode);
-
-//select <ul>
-var ul = document.querySelector('.list-group');
+// // console.log(itemList.parentElement.parentElement.parentElement);
 
 
-ul.insertBefore(li,ul.firstElementChild);       //Adds <li>element before ul - list ka 1t element child ie item1 <li> tag
-console.log(li);
+// //Child Nodes//
+
+// //console.log(itemList.childNodes);     //NodeList -- Basically an Array -- includes LineBreak Elements
+// //console.log(itemList.childNodes);
+// // console.log(itemList.children);
+// // itemList.children[1].style.backgroundColor='yellow';
+
+// // console.log(itemList.firstElementChild);
+// // itemList.firstElementChild.textContent = "Hello 1";
+
+// // console.log(itemList.lastElementChild);
+// // itemList.lastElementChild.textContent = "Hello 5";
+
+// //Next Sibling
+// console.log(itemList.nextSibling);
+
+// //Next Element Sibling
+// console.log(itemList.nextElementSibling);   //No next siblng , adding <span> for it to return <span>
+
+// //Previous SIbling
+// console.log(itemList.previousSibling);
+
+// console.log(itemList.previousElementSibling);
+
+// //create element
+// var newDiv = document.createElement('div');
+// //add class
+// newDiv.className = 'hello';
+// //add id
+// newDiv.id='divID';
+
+// //Add Attribute
+// newDiv.setAttribute('title','Hello Div');
+
+// //Create text node
+// var newDivText = document.createTextNode('Hello World');
+
+// //Add text to DIV
+// newDiv.appendChild(newDivText);
+
+// var container = document.querySelector('header .container');
+// //console.log(container);
+// var h1 = document.querySelector('header h1');
+// //console.log(h1)
+// container.insertBefore(newDiv,h1);
+// //console.log(newDiv);
+
+// newDiv.style.fontFamily = 'monotype corsiva';
+
+// var li = document.createElement('li');
+// var textNode = document.createTextNode('Item 0');
+// li.className = 'list-group-item';
+// li.appendChild(textNode);
+
+// //select <ul>
+// var ul = document.querySelector('.list-group');   //select list-group  = ul class
+
+
+// ul.insertBefore(li,ul.firstElementChild);       //Adds <li>element before ul - list ka 1t element child ie item1 <li> tag
+// console.log(li);
+
+var form = document.getElementById('addForm');
+var itemList = document.getElementById('items');
+
+//Form Submit Event
+form.addEventListener('submit',addItem);
+
+//Delete Event
+itemList.addEventListener('click',removeItem);
+
+
+//Add item Function
+function addItem(e){      //fires this method on form 'submit'
+  e.preventDefault();
+
+//get Input value
+  var newItem = document.getElementById('item').value;
+
+//Create new li element 
+  var li = document.createElement('li');
+  //add class
+  li.className = 'list-group-item';
+
+//Add text node with input value
+  li.appendChild(document.createTextNode(newItem));
+
+  //Create Delete Button element
+
+  var deleteBtn = document.createElement('button');
+
+  //Add classes to del btn
+
+  deleteBtn.className = 'btn btn-danger btn-sm float-right delete';   //Same as in HTML X button classes
+
+  //AppendTextNode
+  deleteBtn.appendChild(document.createTextNode('X'));      //Text X on the button
+  li.appendChild(deleteBtn);
+
+  //createEdit Button
+  var editBtn = document.createElement('button');
+  editBtn.className = "btn btn-warning btn-sm float-right edit";
+  //AppendTextNode
+  editBtn.appendChild(document.createTextNode('Edit'));
+  li.appendChild(editBtn);
+
+  //FINAL append
+  itemList.appendChild(li);   //ul me li append 
+}
+
+//Remove Item Function
+
+function removeItem(e){
+  if(e.target.classList.contains('delete')){      //to fire event only on clicking X button
+      if(confirm('Are you Sure? ')){
+        var li = e.target.parentElement;
+        itemList.removeChild(li);
+      }
+  }
+}
