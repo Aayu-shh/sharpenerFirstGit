@@ -1,0 +1,28 @@
+Cheat Sheet DOM Manipulation
+
+-querySelector
+-GetElementByID
+-getElementsByClassName   - always Array returned 
+
+-appendChild
+-createTextNode
+-insertBefore
+
+
+<document>
+<ul>
+    <li>
+    <li id="li2">
+    <li>
+</ul>
+</document>
+
+document.getElementById("li2")     //document - web page - parentest Element
+
+parentElement.getElementById("li2")
+
+
+ReactJS
+
+--Automatic DOM manipulation - done in backend - less mehnat
+
