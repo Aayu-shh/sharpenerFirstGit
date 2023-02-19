@@ -208,6 +208,7 @@
 
 var form = document.getElementById('addForm');
 var itemList = document.getElementById('items');
+var filter = document.getElementById('filter');
 
 //Form Submit Event
 form.addEventListener('submit',addItem);
@@ -215,6 +216,8 @@ form.addEventListener('submit',addItem);
 //Delete Event
 itemList.addEventListener('click',removeItem);
 
+//Filter Event
+filter.addEventListener('keyup',filterItems);
 
 //Add item Function
 function addItem(e){      //fires this method on form 'submit'
@@ -222,6 +225,7 @@ function addItem(e){      //fires this method on form 'submit'
 
 //get Input value
   var newItem = document.getElementById('item').value;
+  var newItemDescription = document.getElementById('item-description').value;
 
 //Create new li element 
   var li = document.createElement('li');
@@ -229,7 +233,7 @@ function addItem(e){      //fires this method on form 'submit'
   li.className = 'list-group-item';
 
 //Add text node with input value
-  li.appendChild(document.createTextNode(newItem));
+  li.appendChild(document.createTextNode(`${newItem} \n ${newItemDescription}`));
 
   //Create Delete Button element
 
@@ -263,4 +267,25 @@ function removeItem(e){
         itemList.removeChild(li);
       }
   }
+}
+
+//Filter Items Function
+function filterItems(e){
+  //convert to lowerCase
+  var text = e.target.value.toLowerCase();
+  //Logs whatever is keyed console.log(text);
+
+  //Get li s 
+  var items = itemList.getElementsByTagName('li');
+  
+  //Convert HTML COllection items to Array
+  Array.from(items).forEach(function(item){
+    var itemName = item.firstChild.textContent;
+    if(itemName.toLowerCase().indexOf(text) != -1){
+      item.style.display = 'block';
+    }
+    else{
+      item.style.display = 'none';
+    }
+  });
 }
