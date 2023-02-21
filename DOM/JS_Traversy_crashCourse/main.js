@@ -101,6 +101,7 @@ const nameInput = document.querySelector('#name');          //#name id
 const emailInput = document.querySelector('#email');        //#email id
 const msg = document.querySelector('.msg');                 //msg class DIV
 const userList = document.querySelector('#users');      //empty ul
+var counter = 0;                //userInLocalStorageCounter
 
 myForm.addEventListener('submit',onSubmit);
 
@@ -117,6 +118,7 @@ function onSubmit(e){
         setTimeout(()=>msg.remove(),2000);
     }
     else{
+        counter++;
         //add the input pair as List Item 
         const li = document.createElement('li');
         li.appendChild(document.createTextNode(`${nameInput.value} : ${emailInput.value}`));
@@ -124,7 +126,17 @@ function onSubmit(e){
         userList.appendChild(li);
         
         //DOM Task10 Adding to local storage
-        localStorage.setItem(nameInput.value,emailInput.value);
+        //localStorage.setItem(nameInput.value,emailInput.value);
+
+        //Task 11 Adding to Local Storage as an Object
+        let user = {
+            name : nameInput.value,
+            email : emailInput.value
+        };
+
+        let user_serialized = JSON.stringify(user);
+        localStorage.setItem(`user ${counter}`,user_serialized);
+        console.log(JSON.parse(user_serialized));
 
         //clearInputField After Submit
         nameInput.value = '';
@@ -146,3 +158,6 @@ function onSubmit(e){
 // document.cookie = 'lastName=Agrawal; expires=' + new Date(9999,9,9).toUTCString();
 
 // console.log(document.cookie);
+
+//  ***RUN once to clear-up everything
+//localStorage.clear();
