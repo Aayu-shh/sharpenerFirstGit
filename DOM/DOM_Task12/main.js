@@ -21,11 +21,18 @@ function onSubmit(e){
         var li = document.createElement('li');
         li.appendChild(document.createTextNode(`${named.value} : ${email.value} : ${phone.value}\n`));
         
+        //Delete Button
         var delBtn = document.createElement('button');
         delBtn.appendChild(document.createTextNode("DELETE"));
         li.appendChild(delBtn);     //Child of ul
-        itemList.appendChild(li);   //Append li to ul
 
+        //Edit Button
+        const editBtn = document.createElement('button');
+        editBtn.appendChild(document.createTextNode('Edit'));
+        li.appendChild(editBtn);
+
+        itemList.appendChild(li);   //Append li to ul
+        
         let user ={
             name:named.value,
             email:email.value,
@@ -33,7 +40,12 @@ function onSubmit(e){
         };
         let user_serialize=JSON.stringify(user);
         localStorage.setItem(user.email,user_serialize);
-        console.log(JSON.parse(user_serialize));
+        //console.log(JSON.parse(user_serialize));
+
+        //clear Fields
+        named.value = '';
+        email.value = '';
+        phone.value = '';
 
         //On click Event on DeleteButton to Remove Item from Screen and LocalStorage
         delBtn.addEventListener('click', onClick);
@@ -46,10 +58,12 @@ function onSubmit(e){
             itemList.removeChild(li);
         }
 
-        //clear Fields
-        named.value='';
-        email.value = '';
-        phone.value = '';
-
+        editBtn.onclick = () =>{
+            localStorage.removeItem(user.email);        //email is the key
+            named.value = user.name;
+            email.value = user.email;
+            phone.value = user.phone;
+            itemList.removeChild(li);
+        };
     }
 }
