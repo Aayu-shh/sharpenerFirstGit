@@ -21,15 +21,15 @@ function onSubmit(e){
         var li = document.createElement('li');
         li.appendChild(document.createTextNode(`${named.value} : ${email.value} : ${phone.value}\n`));
         
-        //Delete Button
-        var delBtn = document.createElement('button');
-        delBtn.appendChild(document.createTextNode("DELETE"));
-        li.appendChild(delBtn);     //Child of ul
-
         //Edit Button
         const editBtn = document.createElement('button');
         editBtn.appendChild(document.createTextNode('Edit'));
         li.appendChild(editBtn);
+        
+        //Delete Button
+        var delBtn = document.createElement('button');
+        delBtn.appendChild(document.createTextNode("DELETE"));
+        li.appendChild(delBtn);     //Child of ul
 
         itemList.appendChild(li);   //Append li to ul
         
