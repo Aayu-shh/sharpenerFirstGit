@@ -3,8 +3,9 @@ const named = document.querySelector("#name");
 const email = document.querySelector("#email");
 const phone = document.querySelector("#phone");
 const msg = document.querySelector(".msg");
+const lMsg = document.querySelector(".listMsg");
 const itemList = document.querySelector(".items");
-// localStorage.clear();
+//localStorage.clear();
 
 myForm.addEventListener('submit',onSubmit);
 
@@ -19,7 +20,11 @@ function onSubmit(e){
     else{
         var li = document.createElement('li');
         li.appendChild(document.createTextNode(`${named.value} : ${email.value} : ${phone.value}\n`));
-        itemList.appendChild(li);
+        
+        var delBtn = document.createElement('button');
+        delBtn.appendChild(document.createTextNode("DELETE"));
+        li.appendChild(delBtn);     //Child of ul
+        itemList.appendChild(li);   //Append li to ul
 
         let user ={
             name:named.value,
@@ -29,6 +34,17 @@ function onSubmit(e){
         let user_serialize=JSON.stringify(user);
         localStorage.setItem(user.email,user_serialize);
         console.log(JSON.parse(user_serialize));
+
+        //On click Event on DeleteButton to Remove Item from Screen and LocalStorage
+        delBtn.addEventListener('click', onClick);
+        
+        function onClick(e)
+        {
+            e.preventDefault();
+            localStorage.removeItem(user.email);
+            var li = e.target.parentElement;
+            itemList.removeChild(li);
+        }
 
         //clear Fields
         named.value='';
