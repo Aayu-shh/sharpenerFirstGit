@@ -25,7 +25,7 @@ function onSubmit(e) {
             phone: phone.value
         };
 
-        axios.post("https://crudcrud.com/api/d1773b58e68345b38b0c9fa37d82c152/appointments",user).then(res=>showOutputPost(res));
+        axios.post("https://crudcrud.com/api/28f35207949c4cf7bacc37854ed7da12/appointments",user).then(res=>showOutputPost(res));
         //clear Fields
         named.value = '';
         email.value = '';
@@ -33,9 +33,8 @@ function onSubmit(e) {
     }
 }
 function onloaded(e) {
-    axios.get("https://crudcrud.com/api/d1773b58e68345b38b0c9fa37d82c152/appointments").then(resp => {
-        showOutputGet(resp);            //throws an OBJECT with data Member as Array of objects with form data
-        //console.log(resp.data);
+    axios.get("https://crudcrud.com/api/28f35207949c4cf7bacc37854ed7da12/appointments").then(resp => {
+        showOutputGet(resp);            //Show arrau of user objects
     });
 }
 
@@ -44,44 +43,80 @@ function showOutputPost(res){
     li.append(document.createTextNode(`${(res.data.name)} : ${(res.data.email)} : ${(res.data.phone)}`))
     let delBtn=document.createElement('button');
     delBtn.append(document.createTextNode("Delete User"));
+    let editBtn = document.createElement('button');
+    editBtn.append(document.createTextNode("Edit User"));
+
+    editBtn.onclick = () => {
+            named.value = res.data.name;
+            email.value = res.data.email;
+            phone.value = res.data.phone;
+            axios.delete(`https://crudcrud.com/api/28f35207949c4cf7bacc37854ed7da12/appointments/${res.data._id}`)
+            .then((editRes)=>{
+                console.log(`Editing User ${ named.value }'s Details`);
+                li.remove();
+            })
+            .catch(err=>console.log('Failed to edit the details'+err))
+    }
 
     delBtn.onclick = () => {
-        let userName=res.name;
-        axios.delete(`https://crudcrud.com/api/d1773b58e68345b38b0c9fa37d82c152/appointments/${res.data._id}`)
+        let userName=res.data.name;
+        axios.delete(`https://crudcrud.com/api/28f35207949c4cf7bacc37854ed7da12/appointments/${res.data._id}`)
             .then(res => {
-                console.log(`${res.data} User deleted sucessfully`);
+                console.log(`${userName}'s data was deleted sucessfully`);
                 li.remove();
             }).catch(err => console.log("Failed to delete User", err));
 
     }
+
+    li.append(editBtn);
     li.append(delBtn);
     itemList.append(li);
     
-    //console.log(res);
+    console.log(res);
     };
 
 function showOutputGet(resObj){
     (resObj.data).forEach((res)=>
     {
+        let userName = res.name;
         let li1 = document.createElement('li');
         li1.append(document.createTextNode(`${(res.name)} : ${(res.email)} : ${(res.phone)}`))
         let delBtn = document.createElement('button');
         delBtn.append(document.createTextNode("Delete User"));
 
+        let editBtn = document.createElement('button');
+        editBtn.append(document.createTextNode("Edit User"));
+
+        editBtn.onclick = () => {
+            axios(`https://crudcrud.com/api/28f35207949c4cf7bacc37854ed7da12/appointments/${res._id}`).then((res)=>{
+                named.value=res.data.name;
+                email.value=res.data.email;
+                phone.value=res.data.phone;
+                axios.delete(`https://crudcrud.com/api/28f35207949c4cf7bacc37854ed7da12/appointments/${res.data._id}`)
+                .then((editRes)=>{
+                    console.log(`Editing User ${named.value}'s Details`);
+                    li1.remove();
+                })
+                
+            })
+            .catch(err => console.log('Failed to edit the details' +err))
+        }
+        
         delBtn.onclick=() => {
-            axios.delete(`https://crudcrud.com/api/d1773b58e68345b38b0c9fa37d82c152/appointments/${res._id}`)
+            axios.delete(`https://crudcrud.com/api/28f35207949c4cf7bacc37854ed7da12/appointments/${res._id}`)
             .then(res=>{
-                console.log(`${res.data} User deleted sucessfully`);
+                console.log(`${userName}'s data was deleted sucessfully`);
                 li1.remove();
             }).catch(err=>console.log("Failed to delete User",err));
             
         }
 
+        li1.append(editBtn);
         li1.append(delBtn);
         itemList.append(li1);
     })
 
-    //console.log(resObj.data);
+    console.log(resObj.data);       //Array of User Objects
 }
 
 
