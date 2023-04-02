@@ -79,18 +79,20 @@ function onloaded(e){
     
     //LoadOnScreen from Local
     localKeys.forEach(key=>{
-        li.appendChild(document.createTextNode(localobj[key]));
+        if(key!="debug")
+            {
+                li.appendChild(document.createTextNode(localobj[key]));
         
-        //Adding buttons Edit Button
-        const editBtn = document.createElement('button');
-        editBtn.appendChild(document.createTextNode('Edit'));
-        li.appendChild(editBtn);
+                //Adding buttons Edit Button
+                const editBtn = document.createElement('button');
+                editBtn.appendChild(document.createTextNode('Edit'));
+                li.appendChild(editBtn);
 
-        //Delete Button
-        var delBtn = document.createElement('button');
-        delBtn.appendChild(document.createTextNode("DELETE"));
-        li.appendChild(delBtn);     //Child of ul
-       
+                //Delete Button
+                var delBtn = document.createElement('button');
+                delBtn.appendChild(document.createTextNode("DELETE"));
+                li.appendChild(delBtn);     //Child of ul
+            }
         /*
         //Adding functionalities to buttons
         delBtn.onclick = () => {
