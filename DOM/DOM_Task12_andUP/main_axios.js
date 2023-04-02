@@ -25,7 +25,7 @@ function onSubmit(e) {
             phone: phone.value
         };
 
-        axios.post("https://crudcrud.com/api/97b102ed84c34da7be2c3ffc3c8c31be/appointments",user).then(res=>showOutput(res));
+        axios.post("https://crudcrud.com/api/d1773b58e68345b38b0c9fa37d82c152/appointments",user).then(res=>showOutputPost(res));
         //clear Fields
         named.value = '';
         email.value = '';
@@ -33,24 +33,74 @@ function onSubmit(e) {
     }
 }
 function onloaded(e) {
-    axios.get("https://crudcrud.com/api/97b102ed84c34da7be2c3ffc3c8c31be/appointments").then(resp => {
-        showOutputGet(resp)
-        console.log(resp.data)
+    axios.get("https://crudcrud.com/api/d1773b58e68345b38b0c9fa37d82c152/appointments").then(resp => {
+        showOutputGet(resp);            //throws an OBJECT with data Member as Array of objects with form data
+        //console.log(resp.data);
     });
 }
 
-function showOutput(res){
-    itemList.innerHTML += `<li>${(res.data.name)} : ${(res.data.email)} : ${(res.data.phone)} <button class='edit'>Edit</button> <button class='del'>Delete</button>`;
-    console.log(res);
+function showOutputPost(res){
+    let li = document.createElement('li');
+    li.append(document.createTextNode(`${(res.data.name)} : ${(res.data.email)} : ${(res.data.phone)}`))
+    let delBtn=document.createElement('button');
+    delBtn.append(document.createTextNode("Delete User"));
+
+    delBtn.onclick = () => {
+        let userName=res.name;
+        axios.delete(`https://crudcrud.com/api/d1773b58e68345b38b0c9fa37d82c152/appointments/${res.data._id}`)
+            .then(res => {
+                console.log(`${res.data} User deleted sucessfully`);
+                li.remove();
+            }).catch(err => console.log("Failed to delete User", err));
+
+    }
+    li.append(delBtn);
+    itemList.append(li);
     
+    //console.log(res);
     };
 
 function showOutputGet(resObj){
     (resObj.data).forEach((res)=>
     {
-        itemList.innerHTML += `<li>${(res.name)} : ${(res.email)} : ${(res.phone)} <button class='edit'>Edit</button> <button class='del'>Delete</button>`;
+        let li1 = document.createElement('li');
+        li1.append(document.createTextNode(`${(res.name)} : ${(res.email)} : ${(res.phone)}`))
+        let delBtn = document.createElement('button');
+        delBtn.append(document.createTextNode("Delete User"));
+
+        delBtn.onclick=() => {
+            axios.delete(`https://crudcrud.com/api/d1773b58e68345b38b0c9fa37d82c152/appointments/${res._id}`)
+            .then(res=>{
+                console.log(`${res.data} User deleted sucessfully`);
+                li1.remove();
+            }).catch(err=>console.log("Failed to delete User",err));
+            
+        }
+
+        li1.append(delBtn);
+        itemList.append(li1);
     })
+
     //console.log(resObj.data);
 }
+
+
+
+// //SetTimeout + Delay, Example
+// console.log('a')
+// console.log('b')
+// new Promise((resolve,reject)=>{
+//     setTimeout(()=>resolve('c'),3000)
+// })
+// .then(data=>{
+//     console.log(data);
+//     new Promise((resolve, reject) => {
+//         setTimeout(() => resolve('d'), 1000)
+//     })
+//         .then(data => {
+//             console.log(data);
+//             console.log('e')
+//         })
+// })
 
 
