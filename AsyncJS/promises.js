@@ -15,6 +15,7 @@ const user={
     lastActivityTime:'19th March'
 }
 
+async function convertToAwait(){
 function getPosts() {
     setTimeout(() => {
         let output = '';
@@ -56,17 +57,22 @@ function deletePost(){          //To delete Last post
         
     })
 }
-Promise.all([createPost({ title: "Post Three", body: "this is post three" }),updateLastUserActivityTime()])
-.then(([cpres,updtLastUsrAct])=>{
-    console.log(updtLastUsrAct);
-    posts.forEach((post)=>console.log(post));
-})
-.then(deletePost).then(()=>{
-    posts.forEach((post)=>console.log(post));
-})
-.catch(err=>console.log(err));
+
+let [cpres, updtLastUsrAct] = await Promise.all([createPost({ title: "Post Three", body: "this is post three" }),updateLastUserActivityTime()])
+console.log(updtLastUsrAct);
+let poppedPost = await deletePost();
+posts.forEach((post)=>console.log(post));
+//getPosts();       To view on screen
+}
+
+//Run ASYNC funtion to run AWAIT codes
+convertToAwait().catch (err=> console.log(err));;
 
 
+
+
+
+/////////////////////////////////////////////////////////////////////
 // then(new Promise((resolve,reject)=>{
 //      posts.pop();
 //      resolve();
@@ -102,4 +108,45 @@ fetchUsers();
 // const promise4 = fetch('https://jsonplaceholder.typicode.com/users').then(res=>res.json());
 
 // Promise.all([promise1,promise2,promise3,promise4]).then((values)=>console.log(values));
-         
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+Yash Bhaiya Tutorial Task13
+
+Promises are what they sound like => Are for FUTURE  ==> Are Asynchronous
+
+May be fulfilled or May not be ==> resolved OR rejected
+
+Promise class in JS
+async function dadMakesPromise(){
+    try {
+    const dadsPromise = await new Promise((resolve, reject) => {
+        //After 10 Days -- Business me u can have what u NEED whenever u NEED       // Can't wait 10 days hence timeout 1000ms
+        
+            let salary = 34000;
+            let salaryCredited = true;
+            let costOfPS5 = 40000;
+            let costOfPS4 = 30000;
+            setTimeout(() => {
+                if (salaryCredited && salary > costOfPS5) {
+                    resolve('Buy a PS5');
+                }
+                else if (salaryCredited == true && salary > costOfPS4) {
+                    reject('Buy a PS4')
+                }
+                else {
+                    reject("Sorry Son, I'll try next month");
+                }
+            }, 1000);
+
+        });
+        console.log(dadsPromise);           //Gives Promise <pending>   -- 
+    }
+catch(err){
+    console.log(`*Sad* ${err}`);
+}}
+
+dadMakesPromise()//.catch((err)=>console.log(err));
+//dadsPromise.then((x)=>console.log(x));
+*/
